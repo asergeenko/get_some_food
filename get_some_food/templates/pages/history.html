@@ -1,0 +1,46 @@
+{% extends "base.html" %}
+{% block title %}Get Some Food - Purchase history{% endblock title %}
+{% block content %}
+<div class="row d-flex justify-content-center align-items-center py-3">
+      <div class="col">
+        <div class="card" id="list1" style="border-radius: .75rem; background-color: #eff1f2;">
+          <div class="card-body py-4 px-4 px-md-5">
+          <h2>Purchase history</h2>
+
+            <hr class="my-2">
+
+            <span id="item_list">
+
+            <span>
+            <div class="row">
+              <div class="col-md-4">
+                <p class="small mb-0">Product</p>
+              </div>
+              <div class="col-md-1">
+                <p class="small mb-0">Amount</p>
+              </div>
+              <div class="col-md-2">
+                <p class="small mb-0">Purchase date</p>
+              </div>
+              <div class="col-md-5">
+                <p class="small mb-0">Comment</p>
+              </div>
+            </div>
+            </span>
+            <hr class="my-2">
+
+            {% for object in object_list %}
+              {% include 'history_list_item.html' %}
+              {% empty %}
+                There is no purchases yet.
+            {% endfor %}
+            </span>
+
+          {% include "paginator.html" %}
+
+          </div>
+        </div>
+      </div>
+    </div>
+
+{% endblock %}

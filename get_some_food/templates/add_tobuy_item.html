@@ -1,0 +1,21 @@
+{% load crispy_forms_tags %}
+<div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Add product to the list</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <form id="add_item_form" method="post" action="">
+      <div class="modal-body">
+          {% csrf_token %}
+          {{ form|crispy }}
+      </div>
+      <div class="modal-footer">
+        <input type="submit" id="add_item_submit" class="btn btn-primary" value="Add"/>
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+      </div>
+      </form>
+    </div>
+  </div>
