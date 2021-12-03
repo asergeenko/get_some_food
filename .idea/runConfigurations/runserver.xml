@@ -11,6 +11,7 @@
       <env name="DJANGO_SECRET_KEY" value="kg*3v*&amp;@v%+f)^!8-ga88k8$##0^+y7og&amp;0u4ryw@to&amp;%uw0k+" />
       <env name="DJANGO_ADMIN_URL" value="admin/" />
       <env name="DJANGO_ALLOWED_HOSTS" value="127.0.0.1,80.78.254.59" />
+      <env name="DJANGO_READ_DOT_ENV_FILE" value="False" />
       <env name="DATABASE_URL" value="postgres://foody:JimmyPage1960$@127.0.0.1:5432/get_some_food" />
     </envs>
     <option name="SDK_HOME" value="" />

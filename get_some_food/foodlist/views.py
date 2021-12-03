@@ -82,7 +82,6 @@ class MyProductsView(ListView):
 
             queryset = ProductItem.objects.filter(product_list=product_list).annotate(
                 last_purchased_days=
-                    #ExtractDay(datetime.datetime.now()-Subquery(purchase_date.values('buy_date')[:1])),
                     ExtractDay(datetime.datetime.today() - Coalesce(Subquery(purchase_date.values('buy_date')[:1]),datetime.datetime.today()))
                     ).annotate(
                 amount_to_warn=F('amount')-F('product__warn_amount')

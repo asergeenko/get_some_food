@@ -3,7 +3,7 @@
                 <p class="lead fw-normal mb-0"><strong>{{ item.product.name }}</strong></p>
               </div>
               <div class="col-md-2">
-                <p class="mb-0">{{ item.amount }} {{ item.product.unit.short_name }}</p>
+                <p class="mb-0">{{ item.amount|floatformat:"-1" }} {{ item.product.unit.short_name }}</p>
               </div>
               <div class="col-md-2">
                   <p class="mb-0">
