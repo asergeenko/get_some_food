@@ -63,6 +63,13 @@ class PurchaseHistoryView(ListView):
     template_name = "pages/history.html"
     paginate_by = 10
 
+    def get_queryset(self):
+        if self.request.user.is_authenticated:
+            shopping_list, _ = ShoppingList.objects.get_or_create(owner=self.request.user)
+            return Purchase.objects.filter(item__shopping_list=shopping_list).order_by('-buy_date')
+
+        return Purchase.objects.none()
+
 class MyProductsView(ListView):
     model = ProductItem
     template_name = "pages/products.html"
@@ -72,6 +79,7 @@ class MyProductsView(ListView):
         if self.request.user.is_authenticated:
             product_list, _ = ProductList.objects.get_or_create(owner=self.request.user)
             purchase_date = Purchase.objects.filter(item__product=OuterRef('product')).order_by('-buy_date')
+
             queryset = ProductItem.objects.filter(product_list=product_list).annotate(
                 last_purchased_days=Coalesce(
                     ExtractDay(datetime.datetime.now()-Subquery(purchase_date.values('buy_date')[:1])),
