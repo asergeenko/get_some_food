@@ -81,10 +81,10 @@ class MyProductsView(ListView):
             purchase_date = Purchase.objects.filter(item__product=OuterRef('product')).order_by('-buy_date')
 
             queryset = ProductItem.objects.filter(product_list=product_list).annotate(
-                last_purchased_days=Coalesce(
+                last_purchased_days=
                     #ExtractDay(datetime.datetime.now()-Subquery(purchase_date.values('buy_date')[:1])),
-                    ExtractDay(Subquery(purchase_date.values('buy_date')[:1])),
-                    -1)).annotate(
+                    (datetime.datetime.today() - Coalesce(Subquery(purchase_date.values('buy_date')[:1])),datetime.datetime.today()).days,
+                    ).annotate(
                 amount_to_warn=F('amount')-F('product__warn_amount')
             ).order_by('-last_purchased_days','amount_to_warn')
             return queryset
