@@ -96,9 +96,9 @@
         success: function(r) {
             if (r.success)
               if (r.created)
-                $("#item_list").append($input.closest(".row"));
+                $("#item_list").append(row);//$input.closest(".row"));
               else
-                $("#item_list").prepend($input.closest(".row"));
+                $("#item_list").prepend(row);//$input.closest(".row"));
         }
     });
     if ($(this).is(':checked'))
