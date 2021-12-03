@@ -23,18 +23,6 @@ class ToBuyListView(TemplateView):
             context['items'] = ShoppingListItem.objects.filter(shopping_list=shopping_list).order_by('purchased','due_date','-creation_date')
         return context
 
-    #def post(self, request, *args, **kwargs):
-    #    context = {'success': False}
-    #    if self.request.is_ajax():
-    #        add_item_form = AddShoppingItemForm(self.request.POST)
-    #        if add_item_form.is_valid():
-    #            item = add_item_form.save(commit=False)
-    #            item.shopping_list = ShoppingList.objects.get(owner=self.request.user)
-    #            item.save()
-    #            context['success'] = True
-    #            context['product_name'] = item.product.name
-    #            context['item_id'] = item.pk
-    #    return JsonResponse(context)
 
 class PurchaseAjaxView(View, LoginRequiredMixin):
     def post(self, request, *args, **kwargs):

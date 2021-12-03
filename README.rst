@@ -61,7 +61,7 @@ Running tests with py.test
 Deployment
 ----------
 
-The app is deployed [here](http://80.78.254.59:9999/) in the following environment:
+The app is deployed at http://80.78.254.59:9999 in the following environment:
 - Ubuntu 16.04
 - nginx
 - uwsgi
