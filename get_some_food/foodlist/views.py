@@ -7,7 +7,7 @@ from django.shortcuts import get_object_or_404, redirect
 from django.http import HttpResponseRedirect
 from django.db.models import F,OuterRef,Subquery
 from django.contrib.auth.mixins import LoginRequiredMixin
-from django.db.models.functions import ExtractDay,Coalesce
+from django.db.models.functions import ExtractDay,Coalesce,TruncDate
 
 
 from .forms import AddShoppingItemForm, AddProductItemForm
@@ -83,7 +83,7 @@ class MyProductsView(ListView):
             queryset = ProductItem.objects.filter(product_list=product_list).annotate(
                 last_purchased_days=
                     #ExtractDay(datetime.datetime.now()-Subquery(purchase_date.values('buy_date')[:1])),
-                    (datetime.datetime.today() - Coalesce(Subquery(purchase_date.values('buy_date')[:1]),datetime.datetime.today())).days
+                    ExtractDay(datetime.datetime.today() - Coalesce(Subquery(purchase_date.values('buy_date')[:1]),datetime.datetime.today()))
                     ).annotate(
                 amount_to_warn=F('amount')-F('product__warn_amount')
             ).order_by('-last_purchased_days','amount_to_warn')
