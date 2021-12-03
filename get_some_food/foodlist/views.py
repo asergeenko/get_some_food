@@ -38,6 +38,7 @@ class PurchaseAjaxView(View, LoginRequiredMixin):
                 purchase = purchases[0]
                 product_item = ProductItem.objects.get(product=purchase.item.product,product_list=product_list)
                 product_item.amount -= purchase.item.amount
+                product_item.in_shopping_list = True
                 product_item.save()
                 purchase.delete()
 
@@ -49,9 +50,12 @@ class PurchaseAjaxView(View, LoginRequiredMixin):
                 product_items = ProductItem.objects.filter(product=purchase.item.product,product_list=product_list)
                 if product_items:
                     product_item = product_items[0]
+                    product_item.amount += purchase.item.amount
                 else:
                     product_item = ProductItem(product=purchase.item.product, amount=purchase.item.amount,
                                                product_list=product_list)
+
+                product_item.in_shopping_list = False
                 product_item.save()
                 context['created'] = True
             context['success'] = True

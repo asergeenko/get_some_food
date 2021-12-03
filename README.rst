@@ -1,16 +1,26 @@
 Get Some Food
 =============
 
-Smart food shopping list
+Smart shopping list with recommendations
 
-.. image:: https://img.shields.io/badge/built%20with-Cookiecutter%20Django-ff69b4.svg?logo=cookiecutter
-     :target: https://github.com/cookiecutter/cookiecutter-django/
-     :alt: Built with Cookiecutter Django
-.. image:: https://img.shields.io/badge/code%20style-black-000000.svg
-     :target: https://github.com/ambv/black
-     :alt: Black code style
+Try it!
+__________
 
-:License: MIT
+You can try the app here: http://80.78.254.59:9999
+Credentials:
+
+username: **default**
+
+password: **get_some_food**
+
+Deployment
+----------
+
+The app is deployed in the following environment:
+- Ubuntu 16.04
+- nginx
+- uwsgi
+- Postgres 9.5
 
 Settings
 --------
@@ -58,12 +68,4 @@ Running tests with py.test
 
   $ pytest
 
-Deployment
-----------
-
-The app is deployed at http://80.78.254.59:9999 in the following environment:
-- Ubuntu 16.04
-- nginx
-- uwsgi
-- Postgres 9.5
 
