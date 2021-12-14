@@ -1,0 +1,44 @@
+{% extends "base.html" %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+<div class = "container">
+	<h1>Product</h1>
+	<form method = 'POST' action= '' enctype = "multipart/form-data" novalidate id = "product_form">
+    {% csrf_token %}
+		{{ form.name| as_crispy_field }}
+    {{ form.unit| as_crispy_field }}
+    {{ form.category.label_tag }}
+    <div class="d-flex flex-row justify-content-start mb-1">
+                  {{ form.category }}
+                  <a href="#" id="edit_category" class="text-muted btn-link" data-mdb-toggle="tooltip" title="Edit category"><i class="fas fa-pencil-alt me-3"></i></a>
+                  <a href="{% url 'foodlist:category_create_popup' %}" onclick="return showAddPopup(this);" class="text-muted" data-mdb-toggle="tooltip" title="Add category"><i class="fas fa-plus-circle"></i></a>
+    </div>
+    {{ form.shelf_life | as_crispy_field}}
+    {{ form.warn_amount| as_crispy_field }}
+    {{ form.default_amount| as_crispy_field }}
+    <input type="submit" value = "Apply" class="btn btn-primary"/>
+	</form>
+</div>
+{% endblock %}
+
+{% block jquery %}
+  if ( $("#id_category option:selected").val() )
+          $("#edit_category").removeClass("disabled");
+        else
+          $("#edit_category").addClass("disabled");
+
+  $("#edit_category").click(function(e){
+        e.preventDefault();
+        category_id = $("#id_category option:selected").val();
+        showEditPopup("/category/" + category_id + "/edit/");
+        return false;
+      });
+
+      $("#id_category").change(function(e){
+        if ( $("#id_category option:selected").val() )
+          $("#edit_category").removeClass("disabled");
+        else
+          $("#edit_category").addClass("disabled");
+      });
+{% endblock jquery %}

@@ -8,6 +8,7 @@
   <form class="form-horizontal" method="post" action="{% url 'users:update' %}">
     {% csrf_token %}
     {{ form|crispy }}
+    <div class="row py-2"><div class="col-md-12"><img width="256" height="256" src="{{ user.avatar.url }}"></div></div>
     <div class="control-group">
       <div class="controls">
         <button type="submit" class="btn btn-primary">Update</button>

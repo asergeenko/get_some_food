@@ -1,7 +1,7 @@
 import datetime
 
 from django.shortcuts import render
-from django.http import JsonResponse
+from django.http import JsonResponse, HttpResponse
 from django.views.generic import TemplateView, ListView, View, UpdateView, DeleteView, CreateView
 from django.shortcuts import get_object_or_404, redirect
 from django.http import HttpResponseRedirect
@@ -9,8 +9,12 @@ from django.db.models import F,OuterRef,Subquery
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.db.models.functions import ExtractDay,Coalesce,TruncDate
 
+from django.contrib.auth.decorators import login_required
 
-from .forms import AddShoppingItemForm, AddProductItemForm
+from categories.models import Category
+
+
+from .forms import AddShoppingItemForm, AddProductItemForm, ProductForm, CategoryForm
 from .models import ShoppingListItem, Purchase, ProductItem, ProductList,Product, ShoppingList
 
 class ToBuyListView(TemplateView):
@@ -20,7 +24,7 @@ class ToBuyListView(TemplateView):
         context = super().get_context_data(**kwargs)
         if self.request.user.is_authenticated:
             shopping_list, _ = ShoppingList.objects.get_or_create(owner=self.request.user)
-            context['items'] = ShoppingListItem.objects.filter(shopping_list=shopping_list).order_by('purchased','due_date','-creation_date')
+            context['items'] = ShoppingListItem.objects.filter(shopping_list=shopping_list, display=True).order_by('purchased','due_date','-creation_date')
         return context
 
 
@@ -120,7 +124,8 @@ class AddToBuyItemView(CreateView,LoginRequiredMixin):
         kwargs['user'] = self.request.user
         return kwargs
 
-def add_product_to_shopping_list(request,pk):
+@login_required
+def add_product_to_shopping_list(request, pk):
     shopping_list,_ = ShoppingList.objects.get_or_create(owner=request.user)
     product_item = ProductItem.objects.get(pk=pk)
     shopping_item = ShoppingListItem(shopping_list=shopping_list,product=product_item.product,amount=product_item.product.default_amount)
@@ -155,6 +160,66 @@ class EditToBuyView(UpdateView,LoginRequiredMixin):
     fields = ["product","amount","comment","due_date"]
     success_url = '/'
 
-class DeleteToBuyView(DeleteView,LoginRequiredMixin):
-    model = ShoppingListItem
-    success_url = '/'
+@login_required
+def delete_to_buy_view(request,pk):
+    item = get_object_or_404(ShoppingListItem, pk=pk)
+    item.display = False
+    item.save()
+    return redirect('/')
+
+#class DeleteToBuyView(DeleteView,LoginRequiredMixin):
+#    model = ShoppingListItem
+#    success_url = '/'
+
+@login_required
+def product_create_popup(request):
+    form = ProductForm(request.POST or None)
+    if form.is_valid():
+        instance = form.save()
+        ## Change the value of the "#id_product". This is the element id in the form
+
+        return HttpResponse(
+            '<script>opener.closePopup(window, "%s", "%s", "#id_product");</script>' % (instance.pk, instance))
+
+    return render(request, "product_form.html", {"form": form})
+
+@login_required
+def product_edit_popup(request, pk=None):
+    instance = get_object_or_404(Product, pk=pk)
+    form = ProductForm(request.POST or None, instance=instance)
+    if form.is_valid():
+        instance = form.save()
+
+        ## Change the value of the "#id_product". This is the element id in the form
+
+        return HttpResponse(
+            '<script>opener.closePopup(window, "%s", "%s", "#id_product");</script>' % (instance.pk, instance))
+
+    return render(request, "product_form.html", {"form": form})
+
+@login_required
+def category_create_popup(request):
+    form = CategoryForm(request.POST or None)
+    if form.is_valid():
+        instance = form.save()
+        ## Change the value of the "#id_category". This is the element id in the form
+
+        return HttpResponse(
+            '<script>opener.closePopup(window, "%s", "%s", "#id_category");</script>' % (instance.pk, instance))
+
+    return render(request, "category_form.html", {"form": form})
+
+@login_required
+def category_edit_popup(request, pk=None):
+    instance = get_object_or_404(Category, pk=pk)
+    form = CategoryForm(request.POST or None, instance=instance)
+    if form.is_valid():
+        instance = form.save()
+
+        ## Change the value of the "#id_category". This is the element id in the form
+
+        return HttpResponse(
+            '<script>opener.closePopup(window, "%s", "%s", "#id_category");</script>' % (instance.pk, instance))
+
+    return render(request, "category_form.html", {"form": form})
+

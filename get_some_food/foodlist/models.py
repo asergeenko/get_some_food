@@ -46,6 +46,8 @@ class ShoppingListItem(models.Model):
     shopping_list = models.ForeignKey(ShoppingList, on_delete=models.CASCADE)
     creation_date = models.DateTimeField(auto_now_add=True)
     purchased = models.BooleanField(default=False)
+    display = models.BooleanField(default=True)
+
 
     def __str__(self):
         return f'{self.product}: {self.amount} {self.product.unit.short_name}. {self.comment}'

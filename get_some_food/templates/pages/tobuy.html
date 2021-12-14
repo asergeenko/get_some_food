@@ -73,9 +73,26 @@
   $("#add_item_btn").click(function(ev){
     ev.preventDefault();
     var url = $(this).data("form");
-    //var title = $(this).data("title");
     $("#add_item_modal").load(url, function() {
-      //$("#product_title").html(title);
+      if ( $("#id_product option:selected").val() )
+          $("#edit_product").removeClass("disabled");
+        else
+          $("#edit_product").addClass("disabled");
+
+      $("#edit_product").click(function(e){
+        e.preventDefault();
+        product_id = $("#id_product option:selected").val();
+        showEditPopup("/product/" + product_id + "/edit/");
+        return false;
+      });
+
+      $("#id_product").change(function(e){
+        if ( $("#id_product option:selected").val() )
+          $("#edit_product").removeClass("disabled");
+        else
+          $("#edit_product").addClass("disabled");
+      });
+
       $("#add_item_form").attr("action",url);
       $(this).modal('show');
     });
