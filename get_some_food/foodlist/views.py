@@ -11,7 +11,7 @@ from django.shortcuts import get_object_or_404, redirect
 from django.shortcuts import render
 from django.views.generic import TemplateView, ListView, View, UpdateView, DeleteView, CreateView
 
-from .forms import AddShoppingItemForm, AddProductItemForm, ProductForm, CategoryForm
+from .forms import AddShoppingItemForm, AddProductItemForm, ProductForm, CategoryForm, EditShoppingItemForm
 from .models import ShoppingListItem, Purchase, ProductItem, ProductList, Product, ShoppingList
 
 
@@ -162,7 +162,7 @@ class AddProductItemView(CreateView, LoginRequiredMixin):
 class EditToBuyView(UpdateView, LoginRequiredMixin):
     model = ShoppingListItem
     template_name = "tobuy_edit.html"
-    fields = ["product", "amount", "comment", "due_date"]
+    form_class = EditShoppingItemForm
     success_url = '/'
 
 

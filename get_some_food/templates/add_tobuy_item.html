@@ -20,6 +20,8 @@
              data-mdb-toggle="tooltip" title="Add product"><i class="fas fa-plus-circle"></i></a>
         </div>
         {{ form.amount|as_crispy_field }}
+        {{ form.due_date|as_crispy_field }}
+        {{ form.comment|as_crispy_field }}
       </div>
       <div class="modal-footer">
         <input type="submit" id="add_item_submit" class="btn btn-primary" value="Add"/>

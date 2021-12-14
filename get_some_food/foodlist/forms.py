@@ -1,6 +1,6 @@
 # from django.db import models
 from categories.models import Category
-from django.forms import ModelForm
+from django.forms import ModelForm, DateField, SelectDateWidget
 
 from .models import ShoppingListItem, ShoppingList, Product, ProductItem
 
@@ -8,7 +8,7 @@ from .models import ShoppingListItem, ShoppingList, Product, ProductItem
 class AddShoppingItemForm(ModelForm):
     class Meta:
         model = ShoppingListItem
-        exclude = ['due_date', 'shopping_list', 'purchased', 'display']
+        fields = ['product', 'amount', 'due_date', 'comment']
 
     def __init__(self, *args, **kwargs):
         user = kwargs.pop('user')
@@ -18,6 +18,23 @@ class AddShoppingItemForm(ModelForm):
             ShoppingListItem.objects.filter(shopping_list=shopping_list).values_list('product__pk', flat=True))
         self.fields['product'].queryset = Product.objects.exclude(pk__in=product_ids)
         self.fields['product'].widget.attrs.update({'class': 'form-control mr-2'})
+        self.fields['due_date'].widget = SelectDateWidget(
+            attrs={'data-date-format': 'dd/mm/yyyy',
+                   'class': 'form-control snps-inline-select'}
+        )
+
+class EditShoppingItemForm(ModelForm):
+    class Meta:
+        model = ShoppingListItem
+        fields = ["product", "amount", "due_date", "comment"]
+
+    def __init__(self, *args, **kwargs):
+        super(EditShoppingItemForm, self).__init__(*args, **kwargs)
+        self.fields['due_date'].widget = SelectDateWidget(
+            attrs={'data-date-format': 'dd/mm/yyyy',
+                   'class': 'form-control snps-inline-select'}
+            )
+
 
 
 class AddProductItemForm(ModelForm):

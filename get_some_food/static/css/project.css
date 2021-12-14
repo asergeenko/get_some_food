@@ -23,3 +23,8 @@
 .item-in-list {
   background-color: #33c56e;
 }
+
+.snps-inline-select {
+    width: auto;
+    display: inline-block;
+}
