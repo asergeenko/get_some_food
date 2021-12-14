@@ -1,13 +1,13 @@
 jQuery(function ($) {
 
-  const SCROLLING_NAVBAR_OFFSET_TOP = 50;
+    const SCROLLING_NAVBAR_OFFSET_TOP = 50;
 
-  $(window).on('scroll', () => {
+    $(window).on('scroll', () => {
 
-    const $navbar = $('.navbar');
-    
-    if (!$navbar.length) return;
+        const $navbar = $('.navbar');
 
-    $('.scrolling-navbar')[$navbar.offset().top > SCROLLING_NAVBAR_OFFSET_TOP ? 'addClass' : 'removeClass']('top-nav-collapse');
-  });
+        if (!$navbar.length) return;
+
+        $('.scrolling-navbar')[$navbar.offset().top > SCROLLING_NAVBAR_OFFSET_TOP ? 'addClass' : 'removeClass']('top-nav-collapse');
+    });
 });

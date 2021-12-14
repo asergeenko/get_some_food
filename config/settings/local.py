@@ -11,17 +11,17 @@ SECRET_KEY = env(
     default="C7MfFwFfWgG9v2BBdIo1zvN6Bmf1Y5sNibSGfoNyGBax9yZq4YxPO0CkwOaxLN0c",
 )
 # https://docs.djangoproject.com/en/dev/ref/settings/#allowed-hosts
-ALLOWED_HOSTS = ["localhost", "0.0.0.0", "127.0.0.1","80.78.254.59"]
+ALLOWED_HOSTS = ["localhost", "0.0.0.0", "127.0.0.1", "80.78.254.59"]
 
 # CACHES
 # ------------------------------------------------------------------------------
 # https://docs.djangoproject.com/en/dev/ref/settings/#caches
-#CACHES = {
+# CACHES = {
 #    "default": {
 #        "BACKEND": "django.core.cache.backends.locmem.LocMemCache",
 #        "LOCATION": "",
 #    }
-#}
+# }
 
 # EMAIL
 # ------------------------------------------------------------------------------
@@ -34,7 +34,6 @@ EMAIL_BACKEND = env(
 # ------------------------------------------------------------------------------
 # http://whitenoise.evans.io/en/latest/django.html#using-whitenoise-in-development
 INSTALLED_APPS = ["whitenoise.runserver_nostatic"] + INSTALLED_APPS  # noqa F405
-
 
 # django-debug-toolbar
 # ------------------------------------------------------------------------------

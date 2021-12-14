@@ -55,9 +55,13 @@
         this._delay = elemDelay;
 
         // Call complete function after animation on last children element ends
-        children.last().on('webkitAnimationEnd animationend', function(){
-            if ($(this).hasClass(options.animationOut)) {self._complete('hidden');}
-            if ($(this).hasClass(options.animationIn))  {self._complete('shown');}
+        children.last().on('webkitAnimationEnd animationend', function () {
+            if ($(this).hasClass(options.animationOut)) {
+                self._complete('hidden');
+            }
+            if ($(this).hasClass(options.animationIn)) {
+                self._complete('shown');
+            }
         });
     };
 
@@ -90,7 +94,9 @@
     };
 
     HDisplay.prototype.toggle = function () {
-        if (this.$element.hasClass('in')) {return this.hide();}
+        if (this.$element.hasClass('in')) {
+            return this.hide();
+        }
         return this.show();
     };
 
@@ -116,7 +122,7 @@
         this.$element
             .removeClass('zmd-hierarchical-displaying')
             .toggleClass('in')
-            .trigger($.Event(eventName+'.zmd.hierarchicalDisplay'));
+            .trigger($.Event(eventName + '.zmd.hierarchicalDisplay'));
     };
 
     HDisplay.prototype._debug = function () {
@@ -148,9 +154,15 @@
             var data = $this.data('zmd.hierarchicalDisplay');
             var options = $.extend({}, HDisplay.DEFAULTS, $this.data(), typeof settings === 'object' && settings);
 
-            if (!data) {$this.data('zmd.hierarchicalDisplay', (data = new HDisplay(this, options)));}
-            if (typeof settings === 'string') {return data[settings]();}
-            if (options.action in data) {return data[options.action]();}
+            if (!data) {
+                $this.data('zmd.hierarchicalDisplay', (data = new HDisplay(this, options)));
+            }
+            if (typeof settings === 'string') {
+                return data[settings]();
+            }
+            if (options.action in data) {
+                return data[options.action]();
+            }
         });
     }
 
@@ -165,7 +177,7 @@
         });
     });
     $(document).on('click', '[data-toggle="hierarchical-display"]', function (e) {
-        var $this   = $(this);
+        var $this = $(this);
         var $target = $($this.attr('data-target') || $this.attr('href'));
 
         if ($this.is('a')) e.preventDefault();

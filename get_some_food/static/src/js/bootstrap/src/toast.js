@@ -5,11 +5,11 @@
  * --------------------------------------------------------------------------
  */
 
-import { defineJQueryPlugin, reflow, typeCheckConfig } from './util/index';
+import {defineJQueryPlugin, reflow, typeCheckConfig} from './util/index';
 import EventHandler from './dom/event-handler';
 import Manipulator from './dom/manipulator';
 import BaseComponent from './base-component';
-import { enableDismissTrigger } from './util/component-functions';
+import {enableDismissTrigger} from './util/component-functions';
 
 /**
  * ------------------------------------------------------------------------
@@ -36,15 +36,15 @@ const CLASS_NAME_SHOW = 'show';
 const CLASS_NAME_SHOWING = 'showing';
 
 const DefaultType = {
-  animation: 'boolean',
-  autohide: 'boolean',
-  delay: 'number',
+    animation: 'boolean',
+    autohide: 'boolean',
+    delay: 'number',
 };
 
 const Default = {
-  animation: true,
-  autohide: true,
-  delay: 5000,
+    animation: true,
+    autohide: true,
+    delay: 5000,
 };
 
 /**
@@ -54,174 +54,174 @@ const Default = {
  */
 
 class Toast extends BaseComponent {
-  constructor(element, config) {
-    super(element);
+    constructor(element, config) {
+        super(element);
 
-    this._config = this._getConfig(config);
-    this._timeout = null;
-    this._hasMouseInteraction = false;
-    this._hasKeyboardInteraction = false;
-    this._setListeners();
-  }
-
-  // Getters
-
-  static get DefaultType() {
-    return DefaultType;
-  }
-
-  static get Default() {
-    return Default;
-  }
-
-  static get NAME() {
-    return NAME;
-  }
-
-  // Public
-
-  show() {
-    const showEvent = EventHandler.trigger(this._element, EVENT_SHOW);
-
-    if (showEvent.defaultPrevented) {
-      return;
+        this._config = this._getConfig(config);
+        this._timeout = null;
+        this._hasMouseInteraction = false;
+        this._hasKeyboardInteraction = false;
+        this._setListeners();
     }
 
-    this._clearTimeout();
+    // Getters
 
-    if (this._config.animation) {
-      this._element.classList.add(CLASS_NAME_FADE);
+    static get DefaultType() {
+        return DefaultType;
     }
 
-    const complete = () => {
-      this._element.classList.remove(CLASS_NAME_SHOWING);
-      EventHandler.trigger(this._element, EVENT_SHOWN);
-
-      this._maybeScheduleHide();
-    };
-
-    this._element.classList.remove(CLASS_NAME_HIDE); // @deprecated
-    reflow(this._element);
-    this._element.classList.add(CLASS_NAME_SHOW);
-    this._element.classList.add(CLASS_NAME_SHOWING);
-
-    this._queueCallback(complete, this._element, this._config.animation);
-  }
-
-  hide() {
-    if (!this._element.classList.contains(CLASS_NAME_SHOW)) {
-      return;
+    static get Default() {
+        return Default;
     }
 
-    const hideEvent = EventHandler.trigger(this._element, EVENT_HIDE);
-
-    if (hideEvent.defaultPrevented) {
-      return;
+    static get NAME() {
+        return NAME;
     }
 
-    const complete = () => {
-      this._element.classList.add(CLASS_NAME_HIDE); // @deprecated
-      this._element.classList.remove(CLASS_NAME_SHOWING);
-      this._element.classList.remove(CLASS_NAME_SHOW);
-      EventHandler.trigger(this._element, EVENT_HIDDEN);
-    };
+    // Public
 
-    this._element.classList.add(CLASS_NAME_SHOWING);
-    this._queueCallback(complete, this._element, this._config.animation);
-  }
+    show() {
+        const showEvent = EventHandler.trigger(this._element, EVENT_SHOW);
 
-  dispose() {
-    this._clearTimeout();
-
-    if (this._element.classList.contains(CLASS_NAME_SHOW)) {
-      this._element.classList.remove(CLASS_NAME_SHOW);
-    }
-
-    super.dispose();
-  }
-
-  // Private
-
-  _getConfig(config) {
-    config = {
-      ...Default,
-      ...Manipulator.getDataAttributes(this._element),
-      ...(typeof config === 'object' && config ? config : {}),
-    };
-
-    typeCheckConfig(NAME, config, this.constructor.DefaultType);
-
-    return config;
-  }
-
-  _maybeScheduleHide() {
-    if (!this._config.autohide) {
-      return;
-    }
-
-    if (this._hasMouseInteraction || this._hasKeyboardInteraction) {
-      return;
-    }
-
-    this._timeout = setTimeout(() => {
-      this.hide();
-    }, this._config.delay);
-  }
-
-  _onInteraction(event, isInteracting) {
-    switch (event.type) {
-      case 'mouseover':
-      case 'mouseout':
-        this._hasMouseInteraction = isInteracting;
-        break;
-      case 'focusin':
-      case 'focusout':
-        this._hasKeyboardInteraction = isInteracting;
-        break;
-      default:
-        break;
-    }
-
-    if (isInteracting) {
-      this._clearTimeout();
-      return;
-    }
-
-    const nextElement = event.relatedTarget;
-    if (this._element === nextElement || this._element.contains(nextElement)) {
-      return;
-    }
-
-    this._maybeScheduleHide();
-  }
-
-  _setListeners() {
-    EventHandler.on(this._element, EVENT_MOUSEOVER, (event) => this._onInteraction(event, true));
-    EventHandler.on(this._element, EVENT_MOUSEOUT, (event) => this._onInteraction(event, false));
-    EventHandler.on(this._element, EVENT_FOCUSIN, (event) => this._onInteraction(event, true));
-    EventHandler.on(this._element, EVENT_FOCUSOUT, (event) => this._onInteraction(event, false));
-  }
-
-  _clearTimeout() {
-    clearTimeout(this._timeout);
-    this._timeout = null;
-  }
-
-  // Static
-
-  static jQueryInterface(config) {
-    return this.each(function () {
-      const data = Toast.getOrCreateInstance(this, config);
-
-      if (typeof config === 'string') {
-        if (typeof data[config] === 'undefined') {
-          throw new TypeError(`No method named "${config}"`);
+        if (showEvent.defaultPrevented) {
+            return;
         }
 
-        data[config](this);
-      }
-    });
-  }
+        this._clearTimeout();
+
+        if (this._config.animation) {
+            this._element.classList.add(CLASS_NAME_FADE);
+        }
+
+        const complete = () => {
+            this._element.classList.remove(CLASS_NAME_SHOWING);
+            EventHandler.trigger(this._element, EVENT_SHOWN);
+
+            this._maybeScheduleHide();
+        };
+
+        this._element.classList.remove(CLASS_NAME_HIDE); // @deprecated
+        reflow(this._element);
+        this._element.classList.add(CLASS_NAME_SHOW);
+        this._element.classList.add(CLASS_NAME_SHOWING);
+
+        this._queueCallback(complete, this._element, this._config.animation);
+    }
+
+    hide() {
+        if (!this._element.classList.contains(CLASS_NAME_SHOW)) {
+            return;
+        }
+
+        const hideEvent = EventHandler.trigger(this._element, EVENT_HIDE);
+
+        if (hideEvent.defaultPrevented) {
+            return;
+        }
+
+        const complete = () => {
+            this._element.classList.add(CLASS_NAME_HIDE); // @deprecated
+            this._element.classList.remove(CLASS_NAME_SHOWING);
+            this._element.classList.remove(CLASS_NAME_SHOW);
+            EventHandler.trigger(this._element, EVENT_HIDDEN);
+        };
+
+        this._element.classList.add(CLASS_NAME_SHOWING);
+        this._queueCallback(complete, this._element, this._config.animation);
+    }
+
+    dispose() {
+        this._clearTimeout();
+
+        if (this._element.classList.contains(CLASS_NAME_SHOW)) {
+            this._element.classList.remove(CLASS_NAME_SHOW);
+        }
+
+        super.dispose();
+    }
+
+    // Private
+
+    _getConfig(config) {
+        config = {
+            ...Default,
+            ...Manipulator.getDataAttributes(this._element),
+            ...(typeof config === 'object' && config ? config : {}),
+        };
+
+        typeCheckConfig(NAME, config, this.constructor.DefaultType);
+
+        return config;
+    }
+
+    _maybeScheduleHide() {
+        if (!this._config.autohide) {
+            return;
+        }
+
+        if (this._hasMouseInteraction || this._hasKeyboardInteraction) {
+            return;
+        }
+
+        this._timeout = setTimeout(() => {
+            this.hide();
+        }, this._config.delay);
+    }
+
+    _onInteraction(event, isInteracting) {
+        switch (event.type) {
+            case 'mouseover':
+            case 'mouseout':
+                this._hasMouseInteraction = isInteracting;
+                break;
+            case 'focusin':
+            case 'focusout':
+                this._hasKeyboardInteraction = isInteracting;
+                break;
+            default:
+                break;
+        }
+
+        if (isInteracting) {
+            this._clearTimeout();
+            return;
+        }
+
+        const nextElement = event.relatedTarget;
+        if (this._element === nextElement || this._element.contains(nextElement)) {
+            return;
+        }
+
+        this._maybeScheduleHide();
+    }
+
+    _setListeners() {
+        EventHandler.on(this._element, EVENT_MOUSEOVER, (event) => this._onInteraction(event, true));
+        EventHandler.on(this._element, EVENT_MOUSEOUT, (event) => this._onInteraction(event, false));
+        EventHandler.on(this._element, EVENT_FOCUSIN, (event) => this._onInteraction(event, true));
+        EventHandler.on(this._element, EVENT_FOCUSOUT, (event) => this._onInteraction(event, false));
+    }
+
+    _clearTimeout() {
+        clearTimeout(this._timeout);
+        this._timeout = null;
+    }
+
+    // Static
+
+    static jQueryInterface(config) {
+        return this.each(function () {
+            const data = Toast.getOrCreateInstance(this, config);
+
+            if (typeof config === 'string') {
+                if (typeof data[config] === 'undefined') {
+                    throw new TypeError(`No method named "${config}"`);
+                }
+
+                data[config](this);
+            }
+        });
+    }
 }
 
 enableDismissTrigger(Toast);

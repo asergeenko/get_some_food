@@ -19,6 +19,7 @@ class UserCreationForm(admin_forms.UserCreationForm):
         }
         labels = {
             'username': _('Name of the user'),
-            'password':_('User password'),
-            'email':_('User email')
+            'password': _('User password'),
+            'email': _('User email'),
+            'avatar': _('User avatar')
         }

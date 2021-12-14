@@ -16,9 +16,9 @@
 
 .offcanvas-backdrop {
   @include overlay-backdrop(
-    $zindex-offcanvas-backdrop,
-    $offcanvas-backdrop-bg,
-    $offcanvas-backdrop-opacity
+      $zindex-offcanvas-backdrop,
+      $offcanvas-backdrop-bg,
+      $offcanvas-backdrop-opacity
   );
 }
 

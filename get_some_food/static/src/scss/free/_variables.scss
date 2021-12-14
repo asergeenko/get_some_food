@@ -308,86 +308,86 @@ $theme-colors: (
 // scss-docs-start note-colors-map
 $note: () !default;
 $note: map-merge(
-  (
-    'primary': (
-      'bgc': lighten($primary, 43%),
-      'border-color': $primary,
+    (
+      'primary': (
+        'bgc': lighten($primary, 43%),
+        'border-color': $primary,
+      ),
+      'secondary': (
+        'bgc': lighten($secondary, 33%),
+        'border-color': $secondary,
+      ),
+      'success': (
+        'bgc': lighten($success, 53%),
+        'border-color': $success,
+      ),
+      'danger': (
+        'bgc': lighten($danger, 36%),
+        'border-color': $danger,
+      ),
+      'warning': (
+        'bgc': lighten($warning, 42%),
+        'border-color': $warning,
+      ),
+      'info': (
+        'bgc': lighten($info, 36%),
+        'border-color': $info,
+      ),
+      'light': (
+        'bgc': $light,
+        'border-color': $dark,
+      ),
     ),
-    'secondary': (
-      'bgc': lighten($secondary, 33%),
-      'border-color': $secondary,
-    ),
-    'success': (
-      'bgc': lighten($success, 53%),
-      'border-color': $success,
-    ),
-    'danger': (
-      'bgc': lighten($danger, 36%),
-      'border-color': $danger,
-    ),
-    'warning': (
-      'bgc': lighten($warning, 42%),
-      'border-color': $warning,
-    ),
-    'info': (
-      'bgc': lighten($info, 36%),
-      'border-color': $info,
-    ),
-    'light': (
-      'bgc': $light,
-      'border-color': $dark,
-    ),
-  ),
-  $note
+    $note
 );
 // scss-docs-end note-colors-map
 
 // scss-docs-start badges-colors-map
 $badges: () !default;
 $badges: map-merge(
-  (
-    'primary': (
-      'background-color': hsl(217, 88.8%, 90%),
-      'text-color': hsl(217, 88.8%, 35%),
-      'icon-color': hsl(217, 88.8%, 65%),
+    (
+      'primary': (
+        'background-color': hsl(217, 88.8%, 90%),
+        'text-color': hsl(217, 88.8%, 35%),
+        'icon-color': hsl(217, 88.8%, 65%),
+      ),
+      'secondary': (
+        'background-color': hsl(277, 98%, 90%),
+        'text-color': hsl(277, 98%, 35%),
+        'icon-color': hsl(277, 98%, 55%),
+      ),
+      'success': (
+        'background-color': hsl(144, 70%, 87%),
+        'text-color': hsl(144, 70%, 15%),
+        'icon-color': hsl(144, 70%, 35%),
+      ),
+      'danger': (
+        'background-color': hsl(350, 90.3%, 92%),
+        'text-color': hsl(350, 90.3%, 25%),
+        'icon-color': hsl(350, 90.3%, 55%),
+      ),
+      'warning': (
+        'background-color': hsl(40, 100%, 88%),
+        'text-color': hsl(40, 80%, 15%),
+        'icon-color': hsl(40, 100%, 40%),
+      ),
+      'info': (
+        'background-color': hsl(195, 83.3%, 90%),
+        'text-color': hsl(195, 83.3%, 18%),
+        'icon-color': hsl(195, 83.3%, 45%),
+      ),
+      'light': (
+        'background-color': hsl(0, 0%, 96%),
+        'text-color': hsl(0, 0%, 25%),
+        'icon-color': hsl(0, 0%, 55%),
+      ),
+      'dark': (
+        'background-color': hsl(0, 0%, 16%),
+        'text-color': hsl(0, 0%, 96%),
+        'icon-color': hsl(0, 0%, 85%),
+      ),
     ),
-    'secondary': (
-      'background-color': hsl(277, 98%, 90%),
-      'text-color': hsl(277, 98%, 35%),
-      'icon-color': hsl(277, 98%, 55%),
-    ),
-    'success': (
-      'background-color': hsl(144, 70%, 87%),
-      'text-color': hsl(144, 70%, 15%),
-      'icon-color': hsl(144, 70%, 35%),
-    ),
-    'danger': (
-      'background-color': hsl(350, 90.3%, 92%),
-      'text-color': hsl(350, 90.3%, 25%),
-      'icon-color': hsl(350, 90.3%, 55%),
-    ),
-    'warning': (
-      'background-color': hsl(40, 100%, 88%),
-      'text-color': hsl(40, 80%, 15%),
-      'icon-color': hsl(40, 100%, 40%),
-    ),
-    'info': (
-      'background-color': hsl(195, 83.3%, 90%),
-      'text-color': hsl(195, 83.3%, 18%),
-      'icon-color': hsl(195, 83.3%, 45%),
-    ),
-    'light': (
-      'background-color': hsl(0, 0%, 96%),
-      'text-color': hsl(0, 0%, 25%),
-      'icon-color': hsl(0, 0%, 55%),
-    ),
-    'dark': (
-      'background-color': hsl(0, 0%, 16%),
-      'text-color': hsl(0, 0%, 96%),
-      'icon-color': hsl(0, 0%, 85%),
-    ),
-  ),
-  $badges
+    $badges
 );
 // scss-docs-end badges-colors-map
 
@@ -571,7 +571,7 @@ $fixed-action-btn-li-margin-bottom: 1.5rem !default;
 
 $btn-group-border-radius: calc(4px - 1px) !default;
 $btn-group-transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out,
-  border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out !default;
+border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out !default;
 
 // Forms
 //
@@ -744,9 +744,9 @@ $form-switch-form-check-input-checked-checkbox-after-background-color: $primary 
 $form-switch-form-check-input-checked-checkbox-after-margin-top: -3px !default;
 $form-switch-form-check-input-checked-checkbox-after-margin-left: 1.0625rem !default;
 $form-switch-form-check-input-checked-checkbox-after-box-shadow: 0 3px 1px -2px rgba(0, 0, 0, 0.2),
-  0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 1px 5px 0 rgba(0, 0, 0, 0.12) !default;
+0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 1px 5px 0 rgba(0, 0, 0, 0.12) !default;
 $form-switch-form-check-input-checked-checkbox-after-transition: background-color 0.2s,
-  transform 0.2s !default;
+transform 0.2s !default;
 
 $form-file-height: calc(1.79rem + 0.33rem + 2px) !default;
 

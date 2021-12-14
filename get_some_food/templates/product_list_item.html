@@ -1,31 +1,38 @@
 <div class="row my-1 {% if item.in_shopping_list %}item-in-list{% elif item.amount_to_warn < 0 and not item.in_shopping_list %}item-warn{% endif %}">
-              <div class="col-md-6">
-                <p class="lead fw-normal mb-0"><strong>{{ item.product.name }}</strong></p>
-              </div>
-              <div class="col-md-2">
-                <p class="mb-0">{{ item.amount|floatformat:"-1" }} {{ item.product.unit.short_name }}</p>
-              </div>
-              <div class="col-md-2">
-                  <p class="mb-0">
-                  {% if item.last_purchased_days >= 0 %}
-                    {% if item.last_purchased_days == 0 %}сегодня
-                    {% else %}{{ item.last_purchased_days }}
-                      {% if item.last_purchased_days == 1 %}день
-                      {% elif item.last_purchesed_days >= 2 and item.last_purchased_days <= 4 %}дня
-                      {% else %}дней
-                      {% endif %}
-                    назад
-                    {% endif %}
-                  {% endif %}
-                  </p>
-              </div>
-              <div class="col-md-2">
-                <div class="d-flex flex-row justify-content-start mb-1">
-                  <a href="#" data-title="{{ item.product.name }}" data-form="{% url 'foodlist:edit_product' pk=item.pk %}" class="text-muted edit" data-mdb-toggle="tooltip" title="Edit product"><i class="fas fa-pencil-alt me-3"></i></a>
-                  <a href="#" data-title="{{ item.product.name }}" data-form="{% url 'foodlist:delete_product' pk=item.pk %}" class="text-muted del" data-mdb-toggle="tooltip" title="Delete product"><i class="fas fa-trash-alt me-3"></i></a>
-                  {% if not item.in_shopping_list %}<a href="{% url 'foodlist:add_product_to_shopping_list' pk=item.pk %}" class="text-muted" data-mdb-toggle="tooltip" title="Add product to shopping list"><i class="fas fa-plus-circle"></i></a>{% endif %}
+  <div class="col-md-6">
+    <p class="lead fw-normal mb-0"><strong>{{ item.product.name }}</strong></p>
+  </div>
+  <div class="col-md-2">
+    <p class="mb-0">{{ item.amount|floatformat:"-1" }} {{ item.product.unit.short_name }}</p>
+  </div>
+  <div class="col-md-2">
+    <p class="mb-0">
+      {% if item.last_purchased_days >= 0 %}
+        {% if item.last_purchased_days == 0 %}сегодня
+          {% else %}{{ item.last_purchased_days }}
+          {% if item.last_purchased_days == 1 %}день
+          {% elif item.last_purchesed_days >= 2 and item.last_purchased_days <= 4 %}дня
+          {% else %}дней
+          {% endif %}
+          назад
+        {% endif %}
+      {% endif %}
+    </p>
+  </div>
+  <div class="col-md-2">
+    <div class="d-flex flex-row justify-content-start mb-1">
+      <a href="#" data-title="{{ item.product.name }}" data-form="{% url 'foodlist:edit_product' pk=item.pk %}"
+         class="text-muted edit" data-mdb-toggle="tooltip" title="Edit product"><i
+              class="fas fa-pencil-alt me-3"></i></a>
+      <a href="#" data-title="{{ item.product.name }}" data-form="{% url 'foodlist:delete_product' pk=item.pk %}"
+         class="text-muted del" data-mdb-toggle="tooltip" title="Delete product"><i
+              class="fas fa-trash-alt me-3"></i></a>
+      {% if not item.in_shopping_list %}
+        <a href="{% url 'foodlist:add_product_to_shopping_list' pk=item.pk %}" class="text-muted"
+           data-mdb-toggle="tooltip" title="Add product to shopping list"><i
+                class="fas fa-plus-circle"></i></a>{% endif %}
 
-                </div>
-              </div>
+    </div>
+  </div>
 </div>
 

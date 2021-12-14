@@ -162,12 +162,13 @@
   $list-group-variant-color: shift-color($value, $list-group-item-color-scale);
   @if (contrast-ratio($list-group-variant-bg, $list-group-variant-color) < $min-contrast-ratio) {
     $list-group-variant-color: mix(
-      $value,
-      color-contrast($list-group-variant-bg),
-      abs($list-group-item-color-scale)
+        $value,
+        color-contrast($list-group-variant-bg),
+        abs($list-group-item-color-scale)
     );
   }
 
   @include list-group-item-variant($state, $list-group-variant-bg, $list-group-variant-color);
 }
+
 // scss-docs-end list-group-modifiers

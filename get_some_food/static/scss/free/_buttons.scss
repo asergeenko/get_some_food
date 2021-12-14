@@ -27,6 +27,7 @@
     &.right {
       margin-left: $btn-icon-margin;
     }
+
     &.left {
       margin-right: $btn-icon-margin;
     }
@@ -35,9 +36,11 @@
   &.btn-lg {
     @include button-size($btn-padding-y-large, $btn-padding-x-large, $btn-font-size-large);
   }
+
   &.btn-md {
     @include button-size($btn-padding-y-medium, $btn-padding-x-medium, $btn-font-size-medium);
   }
+
   &.btn-sm {
     @include button-size($btn-padding-y-small, $btn-padding-x-small, $btn-font-size-small);
   }
@@ -52,14 +55,17 @@
   &[class*="btn-outline-"] {
     padding-top: $btn-outline-padding-y-basic;
     padding-bottom: $btn-outline-padding-y-basic;
+
     &.btn-lg {
       padding-top: $btn-outline-padding-y-large;
       padding-bottom: $btn-outline-padding-y-large;
     }
+
     &.btn-md {
       padding-top: $btn-outline-padding-y-medium;
       padding-bottom: $btn-outline-padding-y-medium;
     }
+
     &.btn-sm {
       padding-top: $btn-outline-padding-y-small;
       padding-bottom: $btn-outline-padding-y-small;

@@ -3,6 +3,7 @@
   &.w-20 {
     width: 20rem;
   }
+
   .rotate {
     margin-top: .2rem;
     font-size: .8rem;
@@ -10,19 +11,24 @@
     cursor: pointer;
     user-select: none;
     transition: all .1s linear;
+
     &.down {
       transform: rotate(90deg);
     }
   }
+
   .nested {
     display: none;
   }
+
   .active {
     display: block;
   }
+
   ul {
     list-style-type: none;
   }
+
   .ic-w {
     width: 1.3rem;
   }
@@ -32,6 +38,7 @@
   &.w-20 {
     width: 20rem;
   }
+
   ul {
     position: relative;
     padding-left: 1em;
@@ -177,6 +184,7 @@
     }
 
   }
+
   .treeview-colorful-items-header {
     display: block;
     padding: .4em;

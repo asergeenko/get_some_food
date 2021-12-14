@@ -42,7 +42,7 @@ LOCALE_PATHS = [str(ROOT_DIR / "locale")]
 # https://docs.djangoproject.com/en/dev/ref/settings/#databases
 DATABASES = {"default": env.db("DATABASE_URL")}
 DATABASES["default"]["ATOMIC_REQUESTS"] = True
-#DATABASES["default"]["ENGINE"] = 'django.db.backends.postgresql_psycopg2'
+# DATABASES["default"]["ENGINE"] = 'django.db.backends.postgresql_psycopg2'
 
 # URLS
 # ------------------------------------------------------------------------------
@@ -94,12 +94,12 @@ MIGRATION_MODULES = {"sites": "get_some_food.contrib.sites.migrations"}
 # https://docs.djangoproject.com/en/dev/ref/settings/#authentication-backends
 AUTHENTICATION_BACKENDS = [
     "django.contrib.auth.backends.ModelBackend",
-#    "allauth.account.auth_backends.AuthenticationBackend",
+    #    "allauth.account.auth_backends.AuthenticationBackend",
 ]
 # https://docs.djangoproject.com/en/dev/ref/settings/#auth-user-model
 AUTH_USER_MODEL = "users.User"
 # https://docs.djangoproject.com/en/dev/ref/settings/#login-redirect-url
-LOGIN_REDIRECT_URL = "foodlist:list"#"users:redirect"
+LOGIN_REDIRECT_URL = "foodlist:list"  # "users:redirect"
 # https://docs.djangoproject.com/en/dev/ref/settings/#login-url
 LOGIN_URL = "account_login"
 
@@ -109,9 +109,9 @@ LOGIN_URL = "account_login"
 PASSWORD_HASHERS = [
     # https://docs.djangoproject.com/en/dev/topics/auth/passwords/#using-argon2-with-django
     "django.contrib.auth.hashers.Argon2PasswordHasher",
-    #"django.contrib.auth.hashers.PBKDF2PasswordHasher",
-    #"django.contrib.auth.hashers.PBKDF2SHA1PasswordHasher",
-    #"django.contrib.auth.hashers.BCryptSHA256PasswordHasher",
+    # "django.contrib.auth.hashers.PBKDF2PasswordHasher",
+    # "django.contrib.auth.hashers.PBKDF2SHA1PasswordHasher",
+    # "django.contrib.auth.hashers.BCryptSHA256PasswordHasher",
 ]
 # https://docs.djangoproject.com/en/dev/ref/settings/#auth-password-validators
 AUTH_PASSWORD_VALIDATORS = [
@@ -131,7 +131,7 @@ MIDDLEWARE = [
     "corsheaders.middleware.CorsMiddleware",
     "whitenoise.middleware.WhiteNoiseMiddleware",
     "django.contrib.sessions.middleware.SessionMiddleware",
-    #"django.middleware.locale.LocaleMiddleware",
+    # "django.middleware.locale.LocaleMiddleware",
     "django.middleware.common.CommonMiddleware",
     "django.middleware.csrf.CsrfViewMiddleware",
     "django.contrib.auth.middleware.AuthenticationMiddleware",
@@ -245,7 +245,7 @@ LOGGING = {
     "formatters": {
         "verbose": {
             "format": "%(levelname)s %(asctime)s %(module)s "
-            "%(process)d %(thread)d %(message)s"
+                      "%(process)d %(thread)d %(message)s"
         }
     },
     "handlers": {
@@ -257,7 +257,6 @@ LOGGING = {
     },
     "root": {"level": "INFO", "handlers": ["console"]},
 }
-
 
 # django-allauth
 # ------------------------------------------------------------------------------

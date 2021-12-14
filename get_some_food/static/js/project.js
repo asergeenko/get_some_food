@@ -3,6 +3,7 @@ function showEditPopup(url) {
         'height=500,width=800,resizable=yes,scrollbars=yes');
     return false;
 }
+
 function showAddPopup(triggeringLink) {
     var name = triggeringLink.id.replace(/^add_/, '');
     href = triggeringLink.href;
@@ -10,6 +11,7 @@ function showAddPopup(triggeringLink) {
     win.focus();
     return false;
 }
+
 function closePopup(win, newID, newRepr, id) {
     $(id).append('<option value=' + newID + ' selected >' + newRepr + '</option>')
     win.close();

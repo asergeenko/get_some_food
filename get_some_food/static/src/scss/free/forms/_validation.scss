@@ -211,6 +211,7 @@
               box-shadow: $form-switch-form-check-input-checked-checkbox-after-box-shadow;
             }
           }
+
           &:focus {
             &:before {
               box-shadow: 3px -1px 0px 13px $color;

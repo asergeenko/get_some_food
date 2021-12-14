@@ -1,28 +1,30 @@
 {% load crispy_forms_tags %}
 <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title">Add product to the list</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <form id="add_item_form" method="post" action="">
+  <div class="modal-content">
+    <div class="modal-header">
+      <h5 class="modal-title">Add product to the list</h5>
+      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <form id="add_item_form" method="post" action="">
       <div class="modal-body">
-          {% csrf_token %}
-          {{ form.product.label_tag }}
+        {% csrf_token %}
+        {{ form.product.label_tag }}
 
-          <div class="d-flex flex-row justify-content-start mb-1">
-                  {{ form.product }}
-                  <a href="#" id="edit_product" class="text-muted btn-link" data-mdb-toggle="tooltip" title="Edit product"><i class="fas fa-pencil-alt me-3"></i></a>
-                  <a href="{% url 'foodlist:product_create_popup' %}" onclick="return showAddPopup(this);" class="text-muted" data-mdb-toggle="tooltip" title="Add product"><i class="fas fa-plus-circle"></i></a>
-          </div>
-          {{ form.amount|as_crispy_field }}
+        <div class="d-flex flex-row justify-content-start mb-1">
+          {{ form.product }}
+          <a href="#" id="edit_product" class="text-muted btn-link" data-mdb-toggle="tooltip" title="Edit product"><i
+                  class="fas fa-pencil-alt me-3"></i></a>
+          <a href="{% url 'foodlist:product_create_popup' %}" onclick="return showAddPopup(this);" class="text-muted"
+             data-mdb-toggle="tooltip" title="Add product"><i class="fas fa-plus-circle"></i></a>
+        </div>
+        {{ form.amount|as_crispy_field }}
       </div>
       <div class="modal-footer">
         <input type="submit" id="add_item_submit" class="btn btn-primary" value="Add"/>
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
       </div>
-      </form>
-    </div>
+    </form>
   </div>
+</div>

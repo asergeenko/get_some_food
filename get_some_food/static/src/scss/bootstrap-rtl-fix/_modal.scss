@@ -35,6 +35,7 @@
     @include transition($modal-transition);
     transform: $modal-fade-transform;
   }
+
   .modal.show & {
     transform: $modal-show-transform;
   }
@@ -100,8 +101,7 @@
 
   .btn-close {
     padding: ($modal-header-padding-y * 0.5) ($modal-header-padding-x * 0.5);
-    margin: ($modal-header-padding-y * -0.5) ($modal-header-padding-x * -0.5)
-      ($modal-header-padding-y * -0.5) auto;
+    margin: ($modal-header-padding-y * -0.5) ($modal-header-padding-x * -0.5) ($modal-header-padding-y * -0.5) auto;
   }
 }
 
@@ -210,4 +210,5 @@
     }
   }
 }
+
 // scss-docs-end modal-fullscreen-loop

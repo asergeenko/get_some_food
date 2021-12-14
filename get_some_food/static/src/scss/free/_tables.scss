@@ -36,6 +36,7 @@
   > tbody > tr {
     transition: $table-hover-transition;
   }
+
   > tbody > tr:hover {
     --#{$variable-prefix}table-accent-bg: transparent;
     color: var(--#{$variable-prefix}table-hover-color);

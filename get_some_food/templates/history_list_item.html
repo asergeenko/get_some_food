@@ -1,16 +1,16 @@
 <div class="row my-1">
-              <div class="col-md-4">
-                <p class="lead fw-normal mb-0">{{ object.item.product.name }}</p>
-              </div>
-              <div class="col-md-2">
-                <p class="lead fs-6 mb-0">{{ object.item.amount|floatformat:"-1" }} {{ object.item.product.unit.short_name }}</p>
-              </div>
-              <div class="col-md-2">
-                <p class="lead fs-6 mb-0">{{ object.buy_date|date:"d-m-Y" }}</p>
-              </div>
-              <div class="col-md-4">
-                <p class="lead fs-6 mb-0">{{ object.item.comment }}</p>
-              </div>
+  <div class="col-md-4">
+    <p class="lead fw-normal mb-0">{{ object.item.product.name }}</p>
+  </div>
+  <div class="col-md-2">
+    <p class="lead fs-6 mb-0">{{ object.item.amount|floatformat:"-1" }} {{ object.item.product.unit.short_name }}</p>
+  </div>
+  <div class="col-md-2">
+    <p class="lead fs-6 mb-0">{{ object.buy_date|date:"d-m-Y" }}</p>
+  </div>
+  <div class="col-md-4">
+    <p class="lead fs-6 mb-0">{{ object.item.comment }}</p>
+  </div>
 
 </div>
 

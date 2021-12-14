@@ -12,6 +12,7 @@
 
 import os
 import sys
+
 import django
 
 if os.getenv("READTHEDOCS", default=False) == "True":
@@ -29,7 +30,6 @@ django.setup()
 project = "Get Some Food"
 copyright = """2021, Aleksandr Sergeenko"""
 author = "Aleksandr Sergeenko"
-
 
 # -- General configuration ---------------------------------------------------
 

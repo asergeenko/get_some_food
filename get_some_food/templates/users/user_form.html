@@ -5,10 +5,12 @@
 
 {% block content %}
   <h1>{{ user.username }}</h1>
-  <form class="form-horizontal" method="post" action="{% url 'users:update' %}">
+  <form class="form-horizontal" method="post" action="{% url 'users:update' %}" enctype="multipart/form-data">
     {% csrf_token %}
     {{ form|crispy }}
-    <div class="row py-2"><div class="col-md-12"><img width="256" height="256" src="{{ user.avatar.url }}"></div></div>
+    <div class="row py-2">
+      <div class="col-md-12"><img width="256" height="256" src="{{ user.avatar.url }}"></div>
+    </div>
     <div class="control-group">
       <div class="controls">
         <button type="submit" class="btn btn-primary">Update</button>

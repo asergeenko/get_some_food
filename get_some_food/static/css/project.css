@@ -16,12 +16,10 @@
   text-decoration: line-through;
 }
 
-.item-warn
-{
+.item-warn {
   background-color: #ffb300;
 }
 
-.item-in-list
-{
+.item-in-list {
   background-color: #33c56e;
 }

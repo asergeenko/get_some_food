@@ -14,15 +14,18 @@ h1, h2, h3, h4, h5, h6 {
 .blockquote {
   padding: $blockquote-padding-y $blockquote-padding-x;
   border-left: .25rem solid #eceeef;
+
   &.text-right {
     border-right: .25rem solid #eceeef;
     border-left: none;
   }
+
   .bq-title {
     margin-bottom: 0;
     font-size: $font-size-large;
     font-weight: 400;
   }
+
   p {
     padding: $blockquote-p-padding-y 0;
     font-size: $blockquote-p-font-size;
@@ -32,6 +35,7 @@ h1, h2, h3, h4, h5, h6 {
 @each $name, $color in $basic {
   .bq-#{$name} {
     border-left: 3px solid $color !important;
+
     .bq-title {
       color: $color !important;
     }

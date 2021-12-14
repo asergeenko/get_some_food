@@ -5,19 +5,22 @@
 {% block title %}Get Some Food - To Buy List{% endblock title %}
 {% block content %}
   {% if not request.user.is_authenticated %}
-    <p>To create a buying list you need to <a href="{% url 'account_signup' %}">{% translate "sign up" %}</a> or <a href="{% url 'account_login' %}">{% translate "sign in" %}</a>.</p>
+    <p>To create a buying list you need to <a href="{% url 'account_signup' %}">{% translate "sign up" %}</a> or <a
+            href="{% url 'account_login' %}">{% translate "sign in" %}</a>.</p>
   {% else %}
     <div class="row d-flex justify-content-center align-items-center py-3">
       <div class="col">
         <div class="card" id="list1" style="border-radius: .75rem; background-color: #eff1f2;">
           <div class="card-body py-4 px-4 px-md-5">
-          <div class="d-flex flex-row justify-content-between">
-            <h2>To Buy List</h2>
-            <div>
-              <button type="button" id="add_item_btn" data-form="{% url 'foodlist:add_shopping_item' %}" class="btn btn-primary">Add product</button>
-              {% comment %}<button type="button" id="switch_list_btn" class="btn btn-secondary">Switch list</button>{% endcomment %}
+            <div class="d-flex flex-row justify-content-between">
+              <h2>To Buy List</h2>
+              <div>
+                <button type="button" id="add_item_btn" data-form="{% url 'foodlist:add_shopping_item' %}"
+                        class="btn btn-primary">Add product
+                </button>
+                {% comment %}<button type="button" id="switch_list_btn" class="btn btn-secondary">Switch list</button>{% endcomment %}
+              </div>
             </div>
-          </div>
             <hr class="my-4">
 
             <span id="item_list">
@@ -35,108 +38,108 @@
 {% endblock content %}
 {% if request.user.is_authenticated %}
   {% block modal %}
-  <div class="modal fade" id="add_item_modal" data-form="" tabindex="-1" role="dialog"></div>
-  <div class="modal fade" id="edit_product_modal" tabindex="-1" role="dialog"></div>
+    <div class="modal fade" id="add_item_modal" data-form="" tabindex="-1" role="dialog"></div>
+    <div class="modal fade" id="edit_product_modal" tabindex="-1" role="dialog"></div>
 
-  <form method="post" id="purchase_form">
-    {% csrf_token %}
-    <input type="hidden" name="item_id" id="item_id"/>
-  </form>
+    <form method="post" id="purchase_form">
+      {% csrf_token %}
+      <input type="hidden" name="item_id" id="item_id"/>
+    </form>
 
-  {# Delete product confirmation form #}
+    {# Delete product confirmation form #}
     <div class="modal fade" id="del_product_modal" tabindex="-1" role="dialog">
-    <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title">Delete product</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-        <h3 id="del_product_title"></h3>
-        <p>Are you sure you want to delete this product?</p>
-      </div>
-      <div class="modal-footer">
-        <form method="post" action="" id="del_product_form">
-          {% csrf_token %}
-          <button type="submit" id="del_product_submit" class="btn btn-primary">Delete</button>
-          <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
-        </form>
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title">Delete product</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <h3 id="del_product_title"></h3>
+            <p>Are you sure you want to delete this product?</p>
+          </div>
+          <div class="modal-footer">
+            <form method="post" action="" id="del_product_form">
+              {% csrf_token %}
+              <button type="submit" id="del_product_submit" class="btn btn-primary">Delete</button>
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+            </form>
+          </div>
+        </div>
       </div>
     </div>
-    </div>
-    </div>
-{% endblock modal %}
+  {% endblock modal %}
   {% block jquery %}
 
-  $("#add_item_btn").click(function(ev){
+    $("#add_item_btn").click(function(ev){
     ev.preventDefault();
     var url = $(this).data("form");
     $("#add_item_modal").load(url, function() {
-      if ( $("#id_product option:selected").val() )
-          $("#edit_product").removeClass("disabled");
-        else
-          $("#edit_product").addClass("disabled");
+    if ( $("#id_product option:selected").val() )
+    $("#edit_product").removeClass("disabled");
+    else
+    $("#edit_product").addClass("disabled");
 
-      $("#edit_product").click(function(e){
-        e.preventDefault();
-        product_id = $("#id_product option:selected").val();
-        showEditPopup("/product/" + product_id + "/edit/");
-        return false;
-      });
+    $("#edit_product").click(function(e){
+    e.preventDefault();
+    product_id = $("#id_product option:selected").val();
+    showEditPopup("/product/" + product_id + "/edit/");
+    return false;
+    });
 
-      $("#id_product").change(function(e){
-        if ( $("#id_product option:selected").val() )
-          $("#edit_product").removeClass("disabled");
-        else
-          $("#edit_product").addClass("disabled");
-      });
+    $("#id_product").change(function(e){
+    if ( $("#id_product option:selected").val() )
+    $("#edit_product").removeClass("disabled");
+    else
+    $("#edit_product").addClass("disabled");
+    });
 
-      $("#add_item_form").attr("action",url);
-      $(this).modal('show');
+    $("#add_item_form").attr("action",url);
+    $(this).modal('show');
     });
     return false;
 
     $("#add_item_modal").modal('show');
-  });
+    });
 
-  $(".form-check-input").click(function(){
+    $(".form-check-input").click(function(){
     row = $(this).closest(".row");
     $("#item_id").val($(this).attr("id"));
     formData = $("#purchase_form").serialize();
     $input = $(this);
     $.ajax({
-        type: "POST",
-        url: "{% url  'foodlist:purchase' %}",
-        data: formData,
-        success: function(r) {
-            if (r.success)
-              if (r.created)
-                $("#item_list").append(row);//$input.closest(".row"));
-              else
-                $("#item_list").prepend(row);//$input.closest(".row"));
-        }
+    type: "POST",
+    url: "{% url  'foodlist:purchase' %}",
+    data: formData,
+    success: function(r) {
+    if (r.success)
+    if (r.created)
+    $("#item_list").append(row);//$input.closest(".row"));
+    else
+    $("#item_list").prepend(row);//$input.closest(".row"));
+    }
     });
     if ($(this).is(':checked'))
-      row.addClass("done");
+    row.addClass("done");
     else
-      row.removeClass("done");
-  });
+    row.removeClass("done");
+    });
 
     $(".edit").click(function(ev){
     ev.preventDefault();
     var url = $(this).data("form");
     var title = $(this).data("title");
     $("#edit_product_modal").load(url, function() {
-      $("#product_title").html(title);
-      $("#edit_product_form").attr("action",url);
-      $(this).modal('show');
+    $("#product_title").html(title);
+    $("#edit_product_form").attr("action",url);
+    $(this).modal('show');
     });
     return false;
-  });
+    });
 
-  $(".del").click(function(ev){
+    $(".del").click(function(ev){
     ev.preventDefault();
     var url = $(this).data("form");
     var title = $(this).data("title");
@@ -144,8 +147,8 @@
     $("#del_product_form").attr("action",url);
     $("#del_product_modal").modal('show');
     return false;
-  });
+    });
 
-{% endblock jquery %}
+  {% endblock jquery %}
 {% endif %}
 

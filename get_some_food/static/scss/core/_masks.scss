@@ -4,6 +4,7 @@
   position: relative;
   overflow: hidden;
   cursor: default;
+
   .mask {
     position: absolute;
     top: 0;
@@ -15,10 +16,12 @@
     overflow: hidden;
     background-attachment: fixed;
   }
+
   img, video {
     position: relative;
     display: block;
   }
+
   video {
     &.video-intro {
       top: 50%;
@@ -39,6 +42,7 @@
   .mask {
     opacity: 0;
     transition: $mask-overlay-transition;
+
     &:hover {
       opacity: 1;
     }
@@ -50,6 +54,7 @@
   img, video {
     transition: $mask-zoom-transition;
   }
+
   &:hover {
     img, video {
       transform: $mask-zoom-transform;

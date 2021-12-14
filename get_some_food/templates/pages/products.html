@@ -5,7 +5,8 @@
 
 {% block content %}
   {% if not request.user.is_authenticated %}
-    <p>To create a shopping list you need to <a href="{% url 'account_signup' %}">{% translate "sign up" %}</a> or <a href="{% url 'account_login' %}">{% translate "sign in" %}</a>.</p>
+    <p>To create a shopping list you need to <a href="{% url 'account_signup' %}">{% translate "sign up" %}</a> or <a
+            href="{% url 'account_login' %}">{% translate "sign in" %}</a>.</p>
   {% else %}
     <div class="row d-flex justify-content-center align-items-center py-3">
       <div class="col">
@@ -14,19 +15,21 @@
             <div class="row">
               <div class="col-md-3"><h2>My Products</h2></div>
               <div class="col-md-5">
-                <button type="button" id="add_product_item_btn" data-form="{% url 'foodlist:add_product_item' %}" class="btn btn-primary">Add product</button>
+                <button type="button" id="add_product_item_btn" data-form="{% url 'foodlist:add_product_item' %}"
+                        class="btn btn-primary">Add product
+                </button>
               </div>
               <div class="col-md-4">
                 <div class="p-1">
-                    <div class="row">
-                      <div class="col-md-1 item-warn"></div>
-                      <div class="col-md-11"><small>The product is (almost) out of stock</small></div>
-                    </div>
-                    <div class="row my-1">
-                      <div class="col-md-1 item-in-list"></div>
-                      <div class="col-md-11"><small>The product is added to the shopping list</small></div>
-                    </div>
+                  <div class="row">
+                    <div class="col-md-1 item-warn"></div>
+                    <div class="col-md-11"><small>The product is (almost) out of stock</small></div>
                   </div>
+                  <div class="row my-1">
+                    <div class="col-md-1 item-in-list"></div>
+                    <div class="col-md-11"><small>The product is added to the shopping list</small></div>
+                  </div>
+                </div>
               </div>
             </div>
             <hr class="my-2">
@@ -48,12 +51,12 @@
             </span>
             <hr class="my-2">
 
-            {% for item in object_list %}
-              {% include 'product_list_item.html' %}
-            {% endfor %}
+              {% for item in object_list %}
+                {% include 'product_list_item.html' %}
+              {% endfor %}
             </span>
 
-          {% include "paginator.html" %}
+            {% include "paginator.html" %}
 
           </div>
         </div>
@@ -69,75 +72,75 @@
 
     {# Delete product confirmation form #}
     <div class="modal fade" id="del_product_modal" tabindex="-1" role="dialog">
-    <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title">Delete product</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title">Delete product</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <h3 id="del_product_title"></h3>
+            <p>Are you sure you want to delete this product?</p>
+          </div>
+          <div class="modal-footer">
+            <form method="post" action="" id="del_product_form">
+              {% csrf_token %}
+              <button type="submit" id="del_product_submit" class="btn btn-primary">Delete</button>
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+            </form>
+          </div>
+        </div>
       </div>
-      <div class="modal-body">
-        <h3 id="del_product_title"></h3>
-        <p>Are you sure you want to delete this product?</p>
-      </div>
-      <div class="modal-footer">
-        <form method="post" action="" id="del_product_form">
-          {% csrf_token %}
-          <button type="submit" id="del_product_submit" class="btn btn-primary">Delete</button>
-          <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
-        </form>
-      </div>
-    </div>
-    </div>
     </div>
 
-{% endblock modal %}
+  {% endblock modal %}
   {% block jquery %}
-  $("#add_product_item_btn").click(function(ev){
+    $("#add_product_item_btn").click(function(ev){
     ev.preventDefault();
     var url = $(this).data("form");
     $("#add_product_item_modal").load(url, function() {
-      if ( $("#id_product option:selected").val() )
-          $("#edit_product").removeClass("disabled");
-        else
-          $("#edit_product").addClass("disabled");
+    if ( $("#id_product option:selected").val() )
+    $("#edit_product").removeClass("disabled");
+    else
+    $("#edit_product").addClass("disabled");
 
-      $("#edit_product").click(function(e){
-        e.preventDefault();
-        product_id = $("#id_product option:selected").val();
-        showEditPopup("/product/" + product_id + "/edit/");
-        return false;
-      });
+    $("#edit_product").click(function(e){
+    e.preventDefault();
+    product_id = $("#id_product option:selected").val();
+    showEditPopup("/product/" + product_id + "/edit/");
+    return false;
+    });
 
-      $("#id_product").change(function(e){
-        if ( $("#id_product option:selected").val() )
-          $("#edit_product").removeClass("disabled");
-        else
-          $("#edit_product").addClass("disabled");
-      });
+    $("#id_product").change(function(e){
+    if ( $("#id_product option:selected").val() )
+    $("#edit_product").removeClass("disabled");
+    else
+    $("#edit_product").addClass("disabled");
+    });
 
 
 
-      $("#add_product_item_form").attr("action",url);
-      $(this).modal('show');
+    $("#add_product_item_form").attr("action",url);
+    $(this).modal('show');
     });
     return false;
-  });
+    });
 
-  $(".edit").click(function(ev){
+    $(".edit").click(function(ev){
     ev.preventDefault();
     var url = $(this).data("form");
     var title = $(this).data("title");
     $("#edit_product_modal").load(url, function() {
-      $("#product_title").html(title);
-      $("#edit_product_form").attr("action",url);
-      $(this).modal('show');
+    $("#product_title").html(title);
+    $("#edit_product_form").attr("action",url);
+    $(this).modal('show');
     });
     return false;
-  });
+    });
 
-  $(".del").click(function(ev){
+    $(".del").click(function(ev){
     ev.preventDefault();
     var url = $(this).data("form");
     var title = $(this).data("title");
@@ -145,7 +148,7 @@
     $("#del_product_form").attr("action",url);
     $("#del_product_modal").modal('show');
     return false;
-  });
+    });
 
-{% endblock jquery %}
+  {% endblock jquery %}
 {% endif %}

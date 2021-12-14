@@ -24,9 +24,7 @@
     @media (min-width: $min) {
       @content;
     }
-  }
-
-  @else {
+  } @else {
     @content;
   }
 }
@@ -40,9 +38,7 @@
     @media (max-width: $max) {
       @content;
     }
-  }
-
-  @else {
+  } @else {
     @content;
   }
 }
@@ -57,15 +53,11 @@
     @media (min-width: $min) and (max-width: $max) {
       @content;
     }
-  }
-
-  @else if $max==null {
+  } @else if $max==null {
     @include media-breakpoint-up($lower, $breakpoints) {
       @content;
     }
-  }
-
-  @else if $min==null {
+  } @else if $min==null {
     @include media-breakpoint-down($upper, $breakpoints) {
       @content;
     }
@@ -83,15 +75,11 @@
     @media (min-width: $min) and (max-width: $max) {
       @content;
     }
-  }
-
-  @else if $max==null {
+  } @else if $max==null {
     @include media-breakpoint-up($name, $breakpoints) {
       @content;
     }
-  }
-
-  @else if $min==null {
+  } @else if $min==null {
     @include media-breakpoint-down($name, $breakpoints) {
       @content;
     }
@@ -103,7 +91,9 @@
 }
 
 @mixin hover {
-  &:hover { @content; }
+  &:hover {
+    @content;
+  }
 }
 
 @mixin hover-focus {
@@ -163,7 +153,7 @@
 @mixin make-container-max-widths($max-widths: $container-max-widths, $breakpoints: $grid-breakpoints) {
 
   @each $breakpoint,
-    $container-max-width in $max-widths {
+  $container-max-width in $max-widths {
     @include media-breakpoint-up($breakpoint, $breakpoints) {
       max-width: $container-max-width;
     }
@@ -287,15 +277,13 @@
 @function set-notification-text-color($color) {
   @if (lightness($color) > 80) {
     @return $black-base; // Lighter backgorund, return dark color
-  }
-
-  @else {
+  } @else {
     @return $white-base; // Darker background, return light color
   }
 }
 
 // Make button
-@mixin make-button ($name, $color) {
+@mixin make-button($name, $color) {
   .btn-#{$name} {
     color: set-notification-text-color($color);
     background-color: $color !important;
@@ -367,7 +355,7 @@
 }
 
 // Make outline button
-@mixin make-outline-button ($name, $color) {
+@mixin make-outline-button($name, $color) {
   .btn-outline-#{$name} {
     color: $color !important;
     background-color: transparent !important;

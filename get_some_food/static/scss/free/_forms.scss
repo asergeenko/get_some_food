@@ -620,7 +620,7 @@
 
 // Custom file input browser support
 @each $lang,
-  $text in $custom-mdb-file-text {
+$text in $custom-mdb-file-text {
   .custom-file-input {
     &:lang(#{$lang}) {
       & ~ .custom-file-label {
@@ -654,7 +654,7 @@
     top: 50%;
     transform: translateY(-50%);
     transition: $input-prefix-transition;
-    color: rgba(0,0,0,.87);
+    color: rgba(0, 0, 0, .87);
     pointer-events: none;
 
     &.active {

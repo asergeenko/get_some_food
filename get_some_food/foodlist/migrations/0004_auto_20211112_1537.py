@@ -4,7 +4,6 @@ from django.db import migrations, models
 
 
 class Migration(migrations.Migration):
-
     dependencies = [
         ('foodlist', '0003_itemtobuy_product_purchase'),
     ]

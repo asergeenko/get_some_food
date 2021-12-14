@@ -1,9 +1,9 @@
-from django.db import models
-from django.contrib.auth import get_user_model
-
 from categories.models import Category
+from django.contrib.auth import get_user_model
+from django.db import models
 
 User = get_user_model()
+
 
 class Unit(models.Model):
     '''Units of measurement'''
@@ -12,7 +12,6 @@ class Unit(models.Model):
 
     def __str__(self):
         return f'{self.long_name} ({self.short_name})'
-
 
 
 class Product(models.Model):
@@ -28,6 +27,7 @@ class Product(models.Model):
 
     def __str__(self):
         return f'{self.name} ({self.unit.short_name})'
+
 
 class ShoppingList(models.Model):
     owner = models.ForeignKey(User, on_delete=models.CASCADE)
@@ -48,12 +48,11 @@ class ShoppingListItem(models.Model):
     purchased = models.BooleanField(default=False)
     display = models.BooleanField(default=True)
 
-
     def __str__(self):
         return f'{self.product}: {self.amount} {self.product.unit.short_name}. {self.comment}'
 
     def save(self, *args, **kwargs):
-        if self.amount<0:
+        if self.amount < 0:
             self.amount = 0
         super().save(*args, **kwargs)
 
@@ -66,11 +65,11 @@ class Purchase(models.Model):
     def __str__(self):
         return f'{self.buy_date.strftime("%d-%m-%Y %H:%M")} {self.item}'
 
+
 class ProductList(models.Model):
     owner = models.ForeignKey(User, on_delete=models.CASCADE)
     shared_with = models.ManyToManyField(User, related_name='product_lists', blank=True)
     creation_date = models.DateTimeField(auto_now_add=True)
-
 
     def __str__(self):
         return f'{self.creation_date.strftime("%d-%m-%Y %H:%M")} {self.owner.username}'
@@ -86,6 +85,6 @@ class ProductItem(models.Model):
         return f'{self.product} {self.amount} {self.product.unit.short_name}'
 
     def save(self, *args, **kwargs):
-        if self.amount<0:
+        if self.amount < 0:
             self.amount = 0
         super().save(*args, **kwargs)
