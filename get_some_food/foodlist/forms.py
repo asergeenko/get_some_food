@@ -48,8 +48,9 @@ class ProductForm(ModelForm):
 class CategoryForm(ModelForm):
     class Meta:
         model = Category
-        fields = ['name', 'description', 'parent']
+        fields = ['name', 'parent', 'description']
 
     def __init__(self, *args, **kwargs):
         super(CategoryForm, self).__init__(*args, **kwargs)
-        self.fields['parent'].queryset = Category.objects.exclude(pk=kwargs['instance'].pk)
+        if 'instance' in kwargs:
+            self.fields['parent'].queryset = Category.objects.exclude(pk=kwargs['instance'].pk)
